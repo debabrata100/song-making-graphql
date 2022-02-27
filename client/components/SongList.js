@@ -13,12 +13,16 @@ const SongList = (props) => {
   const { data, loading, error } = useQuery(query);
   if (loading) return <div>loading...</div>;
   return (
-    <div>
+    <ul className="collection">
       {!error &&
         data.songs.map((song) => {
-          return <li key={song.id}>{song.title}</li>;
+          return (
+            <li className="collection-item" key={song.id}>
+              {song.title}
+            </li>
+          );
         })}
-    </div>
+    </ul>
   );
 };
 

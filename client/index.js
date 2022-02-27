@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import App from "./components/App";
 import SongList from "./components/SongList";
 
 const client = new ApolloClient({
@@ -11,7 +12,7 @@ const client = new ApolloClient({
 const Root = () => {
   return (
     <ApolloProvider client={client}>
-      <SongList />
+      <App />
     </ApolloProvider>
   );
 };
