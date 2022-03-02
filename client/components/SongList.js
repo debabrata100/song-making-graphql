@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
 const query = gql`
@@ -22,6 +23,7 @@ const SongList = (props) => {
             </li>
           );
         })}
+      <Link to="song/new">Create</Link>
     </ul>
   );
 };
