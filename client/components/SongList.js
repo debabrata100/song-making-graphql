@@ -14,17 +14,21 @@ const SongList = (props) => {
   const { data, loading, error } = useQuery(query);
   if (loading) return <div>loading...</div>;
   return (
-    <ul className="collection">
-      {!error &&
-        data.songs.map((song) => {
-          return (
-            <li className="collection-item" key={song.id}>
-              {song.title}
-            </li>
-          );
-        })}
-      <Link to="song/new">Create</Link>
-    </ul>
+    <div>
+      <ul className="collection">
+        {!error &&
+          data.songs.map((song) => {
+            return (
+              <li className="collection-item" key={song.id}>
+                {song.title}
+              </li>
+            );
+          })}
+      </ul>
+      <Link to="song/new" className="btn-floating btn-large red right">
+        <i className="material-icons">add</i>
+      </Link>
+    </div>
   );
 };
 

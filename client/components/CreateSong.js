@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
+import { useNavigate } from "react-router-dom";
 
 const ADD_SONG_MUTATION = gql`
   mutation AddSong($title: String) {
@@ -13,15 +15,24 @@ const ADD_SONG_MUTATION = gql`
 const CreateSong = () => {
   const [title, setTitle] = useState("");
   const [addSong, { data, loading, error }] = useMutation(ADD_SONG_MUTATION);
+  const navigate = useNavigate();
+  const addedSong = data && data.addSong.title;
+  useEffect(() => {
+    if (addedSong) {
+      navigate("/");
+    }
+  }, [addedSong]);
+
   const onSubmitForm = (e) => {
     e.preventDefault();
     addSong({ variables: { title } });
   };
   if (error) return <div>Error occured {error}</div>;
   if (loading) return <div>loading...</div>;
-  const addedSong = data && data.addSong.title;
+
   return (
     <div>
+      <Link to="/">Back</Link>
       <h3>Create a new song</h3>
       <div>{addedSong ? `Song ${addedSong} added successfully` : ""}</div>
       <form onSubmit={onSubmitForm}>
